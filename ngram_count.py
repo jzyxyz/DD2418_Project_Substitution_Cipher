@@ -37,13 +37,14 @@ if __name__ == '__main__':
 
     base = os.path.basename(arguments.file)
     targetfile = open(arguments.file, 'r')
-    text_list = list(targetfile.readline())
+    text = targetfile.readline().lower()
+    text = re.sub(r'[^a-z]',
+                  '', text).lower()
+    text_list = list(text)
     targetfile.close()
 
     for n_gram in generate_window(text_list, arguments.ngrams):
-        # normalize the ngram here
-        normalized = re.sub(r'[(),;"?!-\'\s:.]', '<wb>', n_gram).lower()
-        count[normalized] += 1
+        count[n_gram] += 1
 
     gramfile = open('./ngrams/' + os.path.splitext(base)
                     [0] + '_' + str(arguments.ngrams) + 'gram.txt', 'w')
