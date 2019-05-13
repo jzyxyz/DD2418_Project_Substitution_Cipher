@@ -39,5 +39,5 @@ class ngram_score(object):
         for ng in self.ngrams:
             print('{} {:.5f}'.format(ng, self.ngrams[ng]))
 
-ngs = ngram_score('english_bigrams.txt')
+ngs = ngram_score('english_nigrams.txt')
 ngs.print()
