@@ -38,7 +38,7 @@ if __name__ == '__main__':
     base = os.path.basename(arguments.file)
     targetfile = open(arguments.file, 'r')
     text = targetfile.readline().lower()
-    text = re.sub(r'[^a-z]',
+    text = re.sub(r'[\d]',
                   '', text).lower()
     text_list = list(text)
     targetfile.close()
@@ -56,7 +56,9 @@ if __name__ == '__main__':
         lambda acc, cur: acc + cur, sorted_count.values(), 0)
 
     for key in sorted_count:
-        gramfile.write('{:10s}\t{:.4f}\n'.format(
-            key, sorted_count[key]/ngram_total_count))
+        freq = sorted_count[key]/ngram_total_count
+        if freq > 0.0001:
+            gramfile.write('{:10s}\t{:.4f}\n'.format(
+                key, freq))
 
     gramfile.close()
