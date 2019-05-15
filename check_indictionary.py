@@ -1,12 +1,12 @@
 import re
-
+import numpy as np
 
 def readDictionary(file):
-    results = list()
+    results = dict()
     with open(file, 'r', encoding="utf8", errors='replace') as f:
         for line in f:
-            results.append(line.strip())
-    return  results
+            results[line.strip()]=''
+    return results
 
 def readText(file):
     results = list()
@@ -19,7 +19,9 @@ def readText(file):
     return results
 
 def checkwords(reference, text, limit):
+    vocabulary = "abcdefghijklmnopqrstuvwxyz"
     incorrect=dict()
+    correct = np.zeros(len(vocabulary), dtype=int)
     init = 0
     while init<len(text):
         itter = init
@@ -35,11 +37,13 @@ def checkwords(reference, text, limit):
         if len(word)>0:
             init = temp
             print(word)
+            for k in word:
+                correct[vocabulary.index(k)] += 1
         else:
             incorrect[init]=text[init]
             #print(incorrect)
             init+=1
-    return incorrect
+    return correct, incorrect
 
 
 if __name__ == "__main__":
@@ -47,5 +51,6 @@ if __name__ == "__main__":
     textfile = "./cipher/text4_solver.txt"
     dictionary = readDictionary(dicfile)
     textlist = readText(textfile)
-    posible_bad = checkwords(dictionary, textlist,10)
-    print(posible_bad)
+    correct_distribution, posible_bad = checkwords(dictionary, textlist,10)
+    print("this is the number of letters found in the correct words:\n", correct_distribution,
+          "\n Position of posible incorrect letter and the letter found", posible_bad)
