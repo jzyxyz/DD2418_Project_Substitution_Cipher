@@ -1,20 +1,10 @@
-import codecs
 import random
 import ngram_score as ns
 import copy
 lang_model = ns.ngram_score('./english/english_trigrams.txt')
-file_ngrams = './ngrams/text4_3gram.txt'
 
-
-encrypted_text = ""
-cont = 0
-with codecs.open(file_ngrams, 'r', 'utf-8') as f:
-    for line in f:
-        i, d = [func(x) for func, x in zip([str, float], line.strip().split('       	'))]
-        encrypted_text += ' '+i
-        if cont > 100 : break
-        cont+=1
-# encrypted_text = 'enie  wqen  enqz  enoh  fpbg  tbbs  gbpo  wnie  nivo  wnom  wopo  eqgo  poiy  lqso  zbgo  gbze  qmeb  smbw  wqll  lqfo  bmlh  giyo  ilzb  wnqcn  itbde  tbbsz  enopo  mbvol  hoipz  benop  enoqp  wbply  enbzo  wbdly  epden  bfeom  zebph  wpqeo  enozo  cbdly '
+encrypted_text = open('./cipher/text4_translated.txt').readline()
+# encrypted_text = 'bhdzgqektfdzgowbhdzgqzheqztkposektfdzgowzhvotlhotzpotvektfdzgowcpotbgaahdieqztkgekdvdwleosqtmefzqdzmozhyvgrdvpdwkqefowkdvpaeieanqoreospotbgaadaqohdieqztkgekdzsefoaaeleqovgwhegwqzgztzgowqnpotrdpdaqohdieewldlekgwqoreqztkgeqdbdpsvorqfhooaqcgwpotzhfatmqcqtrrevqfhereqdwkdzidvgotqozhevaofdzgowqnyvgovzodwpsovrdaektfdzgowdaexyevgewfeqgwgwqzgztzgowqcpotbgaawokotmzhdieaedvwzzobdajczdajcgwzevdfzbgzhozhevqgwqofgdaqgztdzgowqcdwkyevhdyqeiewvedkdwkbvgzengspotbeveektfdzekgwewladwkcpotbgaawokotmzhdiedzzewkekdyvgrdvpqfhooadwkdqefowkdvpqfhooabhevepotbgaahdieqztkgekdvdwleosqtmefzqqorepotbgaahdieewopekbhgaeozhevqaeqqqonpotbgaahdiehdkexfeaaewzgwqygvgwlzedfhevqdwkozhevqbhoqegrydfztyowpotbdqwozqoyoqgzgienpothdiewokotmzofjepeksovyoqgzgowdrowlzhoqepotdzzewkekqfhooabgzhcpotvyeevqnpotwokotmzvefegiekytwgqhrewzqcqoresdgvcozhevqwozcdwkdzzgreqvefegiekvebdvkqdwkyvdgqenpotrdphdievefegiekhglhaeieaqosqtyyovzsvorpotvsdrgapovfdvevqovyevhdyqpotbeveaeszzokeieaoypotvobwgwzeveqzgwektfdzgowngwqhovzcpothdievefegiekdwektfdzgowdwkeiewgwzhgqqhovzgwzvoktfzovpzexzbefdwmelgwzoqeezhdzektfdzgowgqwozqoaeapdmotzzhefowzewzoszheqtmefzqzhdzpotaedvwzmtzgwqzedkgqrtazgsdfezekdwkforyaexdwkgwioaieqrtfhrovezhdwzhoqeeaerewzqbhgfhrdpgrrekgdzeapqyvgwlzorgwkbhewkgqftqqgwlgznzheqztkposektfdzgowczhevesovecdzsgvqzladwfekgssevqqglwgsgfdwzapsvorrdwposzheqtmefzqpotbgaahdieqztkgekmesovecgwzhdzgzexdrgweqcgwkezdgacdyvofeqqdqoyyoqekzodqtmefzdvednzhvotlhotzzhgqmoojcpotbgaasgwkdvdwleosgqqteqveaeidwzzozheqztkposektfdzgownzheagqzgqwozexhdtqzgiecwovgqkeqglwekzomeqonzhgqgqwozdmoojzhdzbgaazeaapothobegzhevzozedfhovhobzoaedvwngwqzedkcgzbgaavdgqegqqteqzhdzbgaaewdmaepotzomelgwzotwkevqzdwkzheyobevdwkgryovzdwfeosektfdzgowngzbgaaoyewtygkedqosbhpdwkhobyeoyaeqtffeekdwksdgabgzhgwgzngzbgaakerowqzvdzezheyoagzgfdawdztveoszheektfdzgowyvofeqqdwkhobektfdzgowfdwmetqekzoqtyyovzckeieaoycfhdwledwkfhdaaewleqofgezpnsovzhoqeospotbhoyadwzobovjgwzheektfdzgowsgeakcgwbhdzeievfdydfgzpcektfdzgowqztkgeqfdwkeieaoyzhdzkeeyevtwkevqzdwkgwloszheyvofeqqewdmagwlpotzomedroveessefzgiedwkdrovejwobaekledmaeyvdfzgzgowevnzhgqfhdyzevqezqzheqfewesovzheadzevfhdyzevqdwkbgaaewdmaepotzoyadfezhergwfowzexzzhvotlhgzqgwgzgdakgqftqqgowoszhejepgqqteqngzbgaadaqofhdvzzhekeieaoyrewzosektfdzgowqztkgeqdqdkgqfvezekelveeyvolvdrregwkeyewkewzosgwgzgdazedfhevzvdgwgwlnbhdzgqektfdzgowbhewbefowqgkevzhdzbedaacveldvkaeqqosbhezhevbebewzzoqfhooaovbhdzzpyeosqfhooabedzzewkekchdiemeewektfdzekgwqorebdpcgzqeerqgwfowfegidmaezhdzzhefowfeyzosbhdzgqektfdzgowqhotakqzgaaaewkgzqeaszodhedazhpkemdzenhobeievczhefowfeyzosektfdzgowgqwozreveapfowzeqzekcgzgqsatgkdwkeievfhdwlgwlcbhgfhgwgzqeasgqdwgwkgfdzg'
 
 encrypted_words = encrypted_text.split(' ')
 
@@ -48,7 +38,7 @@ ref_score = -1000000
 max_score = ref_score
 t = 1.0
 cooling_down = 0.9997
-
+cont = 0
 while True:
     new_key = shuffle(key)
     new_score = calc_score(new_key)
@@ -67,3 +57,5 @@ while True:
             ref_score = new_score
             key = new_key
     t *= cooling_down
+    if t < 0.0001:
+        break;
