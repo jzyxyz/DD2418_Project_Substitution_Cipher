@@ -36,7 +36,7 @@ def checkwords(reference, text, limit):
             init = temp
             print(word)
         else:
-            incorrect[init]=text[init-1]
+            incorrect[init]=text[init]
             #print(incorrect)
             init+=1
     return incorrect
