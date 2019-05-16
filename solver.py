@@ -45,17 +45,18 @@ while True:
     if new_score > ref_score:
         if new_score > max_score:
             max_score = new_score
-            print('temperature', t)
-            print('POINTS', new_score)
-            print('KEY', new_key)
+            print('temperature: ', t)
+            print('score: ', new_score)
+            print('key: ', new_key)
             print(translate(cipher_alphabet, new_key, encrypted_words))
         key = new_key
         ref_score = new_score
 
     else:
+        # move to a neighbouring state
         if random.random() < t:
             ref_score = new_score
             key = new_key
     t *= cooling_down
     if t < 0.0001:
-        break;
+        break
