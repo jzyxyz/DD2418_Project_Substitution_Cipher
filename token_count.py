@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     for key in sorted_count:
         freq = sorted_count[key]/total_count
-        if freq > 0.011:
+        if freq > 0.005:
             gramfile.write('{:10s}\t{:.4f}\n'.format(
                 key, freq))
 

@@ -15,17 +15,16 @@ Abgeiba Yaroslava Isunza Navarro, ayin@kth.se
 ├── ngram_count.py `ngram frequency counter`  
 ├── ngrams `ngrams frequency files are generated to this folder`  
 ├── ngram_score.py `language model builder`  
+├── processed_cipher.txt `file holder for preprocessed cipher`  
 ├── README.md  
 ├── solver.py `probalistic solver, works`  
 ├── token_count.py `n-letter token frequency counter`  
 ├── tokens `n-letter token frequency files are generated to this folder`  
-└── translate_text4.py `preprocessing for files with punctuations`
+└── translate_text4.py `preprocessing for text4 which has punctuations`
 
 ## How to?
 
-### preprocessing
-
-> Spaces are present, NERs exist.
+### generating statistics
 
 ```bash
 python token_counter.py -f path/to/file -l 2
@@ -33,14 +32,28 @@ python token_counter.py -f path/to/file -l 2
 
 counts words like ok, no, hi, at, of, in...
 
-> Spaces are removed, Punctuations are encrypted
-
 ```bash
 python ngram_counter.py -f path/to/file -n 1
 ```
 
+counts n-grams frequencies with the specified n
+
+for text4 where punctuations are also encrypted, run
+
+```bash
+python translate_text4.py
+```
+
 ### solver
+
+please see the comments in the file also for details
 
 ```bash
 python solver.py
+```
+
+### check which letters are correctly decrypted
+
+```bash
+python check_in_dictionary_improved_sh
 ```

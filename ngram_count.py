@@ -8,8 +8,6 @@ from functools import reduce
 
 
 def generate_window(seq, n):
-    "Returns a sliding window (of width n) over data from the iterable"
-    "   s -> (s0,s1,...s[n-1]), (s1,s2,...,sn), ...                   "
     it = iter(seq)
     result = tuple(islice(it, n))
     if len(result) == n:
